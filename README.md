@@ -11,7 +11,7 @@ Get a worpdress instance working on top of Docker, to easily export/import your 
 
 ## 2. Install the docker image
 
-Create a new folder, download `docker-compose.yml` file
+Create a new folder, download the `docker-compose.yml` file in it
 
 Set some variables in this file:
 
