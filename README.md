@@ -26,3 +26,35 @@ The first init should take some minutes, then you should get a successful messag
 ## 3. Useful commands
 
 Run this command to check if the port used by Docker is listening: `sudo lsof -iTCP:8000 -sTCP:LISTEN`
+
+## 4. (OPTIONAL) Nginx as a reverse proxy
+
+### 4.1. Edit wp-config.php file in the container
+
+#### 4.1.1. Access command line from the container
+
+sudo docker container exec -it $(sudo docker container ls | grep "wordpress:latest" | cut -d" " -f1) bash
+
+#### 4.1.2. Install nano or vim
+
+`apt install nano` or `apt install vim`
+
+#### 4.1.2. Edit /var/www/html/wp-config.php file
+
+`vi /var/www/html/wp-config.php`
+
+Add those lines (bear in mind to change URL with your proxified site URL):
+
+```
+...
+define('FORCE_SSL_ADMIN', true);
+
+if ($_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
+  $_SERVER['HTTPS'] = 'on';
+  $_SERVER['SERVER_PORT'] = 443;
+}
+
+define('WP_HOME','https://example.com/site/');
+define('WP_SITEURL','https://example.com/site/');
+...
+```
