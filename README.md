@@ -19,10 +19,10 @@ Set some variables in this file:
 2. MYSQL_PASSWORD
 3. WORDPRESS_DB_PASSWORD
 
-Execute the following command from this new folder: `docker compose up -d`
+Execute the following command from this new folder: `sudo docker compose up -d`
 
 The first init should take some minutes, then you should get a successful message.
 
 ## 3. Useful commands
 
-Run this command to check if the port used by Docker is listening: `lsof -iTCP:8000 -sTCP:LISTEN`
+Run this command to check if the port used by Docker is listening: `sudo lsof -iTCP:8000 -sTCP:LISTEN`
