@@ -61,3 +61,24 @@ In order to avoid filesystem errors when installing extensions, for example
 #### 4.2.2. Give ownership recursively
 
 `chown -R www-data:www-data /var/www/html`
+
+## 5. (OPTIONAL) Share a local folder from host <> container
+
+#### 5.1. Edit docker-compose.yml file
+Add the line below, replace `{host_path}:{container_path}` from `docker-compose.yml` file:
+```
+///
+wordpress:
+    image: wordpress:latest
+    volumes:
+      - wp_data:/var/www/html
+      - {host_path}:{container_path}
+    ports:
+...
+```
+
+#### 5.2. Update container
+
+Run this command from the folder containing `docker-compose.yml` file:
+
+`sudo docker compose pull && sudo docker compose up -d`
