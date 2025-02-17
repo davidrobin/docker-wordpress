@@ -39,6 +39,9 @@ List existing volumes\
 Update your Docker applications following a change in your `docker-compose.yml` file\
 `sudo docker compose pull && sudo docker compose up -d`
 
+Run shell prompt from WordPress container\
+`sudo docker exec -it $(sudo docker ps | grep wp-wordpress | cut -d' ' -f1) sh`
+
 ### 3.2.Generic commands
 Check if the port used by Docker is listening\
 `sudo lsof -iTCP:8000 -sTCP:LISTEN`
