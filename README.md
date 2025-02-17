@@ -26,9 +26,11 @@ The first init should take some minutes, then you should get a successful messag
 ## 3. Useful commands
 
 ### 3.1. Docker commands
+List existing volumes\
+ `sudo docker volume list`
 
 ### 3.2.Generic commands
-Check if the port used by Docker is listening
+Check if the port used by Docker is listening\
 `sudo lsof -iTCP:8000 -sTCP:LISTEN`
 
 ## 4. (OPTIONAL) Nginx as a reverse proxy
@@ -36,10 +38,10 @@ Check if the port used by Docker is listening
 ### 4.1. Edit wp-config.php file in the container
 
 #### 4.1.1. Edit /var/www/html/wp-config.php file
-
+Execute this command\
 `sudo vi /var/lib/docker/volumes/wp_wp_data/_data/wp-config.php`
 
-Add those lines (bear in mind to change URL with your proxified site URL):
+Then add those lines (bear in mind to change URL with your proxified site URL):
 
 ```
 ...
@@ -90,5 +92,9 @@ Run this command from the folder containing `docker-compose.yml` file:
 ## 6. Appendix
 
 #### 6.1. Folders on Linux
+
+WordPress volume\
 `/var/lib/docker/volumes/wp_wp_data/_data/`
+
+MariaDB volume\
 `/var/lib/docker/volumes/wp_db_data/_data/`
