@@ -85,23 +85,17 @@ Give ownership recursively\
 ## 5. (OPTIONAL) Update volume content properly
 In case you've made change locally and you want to update your applications on your remote server for instance
 
-Update WordPress application's volume content\
- ```
-mkdir _data && \
-tar xvzf wp_wp* -C _data && \
-sudo rm -r /var/lib/docker/volumes/wp_wp_data/_data && \
-sudo mv _data /var/lib/docker/volumes/wp_wp_data/ && \
-rm -r _data
-```
+Create Wordpress application's volume archive\
+`sudo tar -zcv --exclude='wp-config.php' -f ./wp_wp.tar.gz /var/lib/docker/volumes/wp_wp_data/_data
 
-Update MariaDB application's volume content\
- ```
-mkdir _data && \
-tar xvzf wp_db* -C _data && \
-sudo rm -r /var/lib/docker/volumes/wp_db_data/_data && \
-sudo mv _data /var/lib/docker/volumes/wp_db_data/ && \
-rm -r _data
-```
+Expand WordPress application's volume archive\
+ `sudo tar -xf ./wp_wp.tar.gz -C /var/lib/docker/volumes/wp_wp_data/_data --strip-components=2`
+
+Create MariaDB application's volume archive\
+`sudo tar -zcvf ./wp_db.tar.gz /var/lib/docker/volumes/wp_db_data/_data
+
+Expand MariaDB application's volume archive\
+ `sudo tar -xf ./wp_db.tar.gz -C /var/lib/docker/volumes/wp_db_data/_data --strip-components=2`
 
 Finally, restart containers\
 `sudo docker restart $(sudo docker ps -q)`
@@ -111,7 +105,7 @@ Finally, restart containers\
 #### 6.1. Edit docker-compose.yml file
 Add the line below, replace `{host_path}:{container_path}` from `docker-compose.yml` file:
 ```
-///
+...
 wordpress:
     image: wordpress:latest
     volumes:
