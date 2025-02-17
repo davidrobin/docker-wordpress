@@ -86,13 +86,13 @@ Give ownership recursively\
 In case you've made change locally and you want to update your applications on your remote server for instance
 
 Create Wordpress application's volume archive\
-`sudo tar -zcv --exclude='wp-config.php' -f ./wp_wp.tar.gz /var/lib/docker/volumes/wp_wp_data/_data`
+`sudo tar -zc --exclude='wp-config.php' -f ./wp_wp.tar.gz /var/lib/docker/volumes/wp_wp_data/_data`
 
 Expand WordPress application's volume archive\
  `sudo tar -xf ./wp_wp.tar.gz -C /var/lib/docker/volumes/wp_wp_data/_data --strip-components=2`
 
 Create MariaDB application's volume archive\
-`sudo tar -zcvf ./wp_db.tar.gz /var/lib/docker/volumes/wp_db_data/_data`
+`sudo tar -zcf ./wp_db.tar.gz /var/lib/docker/volumes/wp_db_data/_data`
 
 Expand MariaDB application's volume archive\
  `sudo tar -xf ./wp_db.tar.gz -C /var/lib/docker/volumes/wp_db_data/_data --strip-components=2`
