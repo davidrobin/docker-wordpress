@@ -79,9 +79,33 @@ Access command line from the container\
 Give ownership recursively\
 `chown -R www-data:www-data /var/www/html`
 
-## 5. (OPTIONAL) Share a local folder from host <> container
+## 5. (OPTIONAL) Update volume content properly
+In case you've made change locally and you want to update your applications on your remote server for instance
 
-#### 5.1. Edit docker-compose.yml file
+Update WordPress application's volume content\
+ ```
+mkdir _data && \
+tar xvzf wp_wp* -C _data && \
+sudo rm -r /var/lib/docker/volumes/wp_wp_data/_data && \
+sudo mv _data /var/lib/docker/volumes/wp_wp_data/ && \
+rm -r _data
+```
+
+Update MariaDB application's volume content\
+ ```
+mkdir _data && \
+tar xvzf wp_db* -C _data && \
+sudo rm -r /var/lib/docker/volumes/wp_db_data/_data && \
+sudo mv _data /var/lib/docker/volumes/wp_db_data/ && \
+rm -r _data
+```
+
+Finally, restart containers\
+`sudo docker restart $(sudo docker ps -q)`
+
+## 6. (OPTIONAL) Share a local folder from host <> container
+
+#### 6.1. Edit docker-compose.yml file
 Add the line below, replace `{host_path}:{container_path}` from `docker-compose.yml` file:
 ```
 ///
@@ -94,15 +118,15 @@ wordpress:
 ...
 ```
 
-#### 5.2. Update container
+#### 6.2. Update applications
 
 Run this command from the folder containing `docker-compose.yml` file:
 
 `sudo docker compose pull && sudo docker compose up -d`
 
-## 6. Appendix
+## 7. Appendix
 
-#### 6.1. Folders on Linux
+#### 7.1. Folders on Linux
 
 WordPress volume\
 `/var/lib/docker/volumes/wp_wp_data/_data/`
