@@ -4,7 +4,7 @@ Get a worpdress instance working on top of Docker, to easily export/import your 
 ## 1. Install Docker
 
 ### 1.1. On your computer:
-[https://docs.docker.com/engine/install/debian/](https://docs.docker.com/get-started/get-docker/)
+[https://docs.docker.com/get-started/get-docker/](https://docs.docker.com/get-started/get-docker/) 
 
 ### 1.2. On a local/remote server:
 [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/) 
@@ -25,7 +25,11 @@ The first init should take some minutes, then you should get a successful messag
 
 ## 3. Useful commands
 
-Run this command to check if the port used by Docker is listening: `sudo lsof -iTCP:8000 -sTCP:LISTEN`
+### 3.1. Docker commands
+
+### 3.2.Generic commands
+Check if the port used by Docker is listening
+`sudo lsof -iTCP:8000 -sTCP:LISTEN`
 
 ## 4. (OPTIONAL) Nginx as a reverse proxy
 
@@ -82,3 +86,9 @@ wordpress:
 Run this command from the folder containing `docker-compose.yml` file:
 
 `sudo docker compose pull && sudo docker compose up -d`
+
+## 6. Appendix
+
+#### 6.1. Folders on Linux
+`/var/lib/docker/volumes/wp_wp_data/_data/`
+`/var/lib/docker/volumes/wp_db_data/_data/`
