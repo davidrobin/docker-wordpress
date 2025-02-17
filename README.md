@@ -40,7 +40,7 @@ Update your Docker applications following a change in your `docker-compose.yml` 
 `sudo docker compose pull && sudo docker compose up -d`
 
 Run shell prompt from WordPress container\
-`sudo docker exec -it $(sudo docker ps -a | grep wp-wordpress | cut -d' ' -f1) sh`
+`sudo docker exec -it $(sudo docker ps | grep wp-wordpress | cut -d' ' -f1) sh`
 
 ### 3.2.Generic commands
 Check if the port used by Docker is listening\
