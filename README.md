@@ -26,6 +26,13 @@ The first init should take some minutes, then you should get a successful messag
 ## 3. Useful commands
 
 ### 3.1. Docker commands
+
+List existing images\
+ `sudo docker image list`
+
+List existing containers\
+ `sudo docker container list`
+ 
 List existing volumes\
  `sudo docker volume list`
 
