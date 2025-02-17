@@ -36,6 +36,9 @@ List existing containers\
 List existing volumes\
  `sudo docker volume list`
 
+Update your Docker applications following a change in your docker-compose.yml file\
+`sudo docker compose pull && sudo docker compose up -d`
+
 ### 3.2.Generic commands
 Check if the port used by Docker is listening\
 `sudo lsof -iTCP:8000 -sTCP:LISTEN`
