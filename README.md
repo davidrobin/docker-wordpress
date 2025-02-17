@@ -42,9 +42,12 @@ Check if the port used by Docker is listening\
 
 ## 4. (OPTIONAL) Nginx as a reverse proxy
 
-### 4.1. Edit wp-config.php file in the container
+### 4.1. Update your Nginx setup
 
-#### 4.1.1. Edit /var/www/html/wp-config.php file
+Adapt your setup from `nginx-location.conf` file
+
+### 4.2. Edit wp-config.php file in the container
+
 Execute this command\
 `sudo vi /var/lib/docker/volumes/wp_wp_data/_data/wp-config.php`
 
@@ -64,15 +67,13 @@ define('WP_SITEURL','https://example.com/site/');
 ...
 ```
 
-### 4.2. Give ownership to www-data user for html folder
+### 4.3. Give ownership to www-data user for html folder
 In order to avoid filesystem errors when installing extensions, for example
 
-#### 4.2.1. Access command line from the container
-
+Access command line from the container\
 `sudo docker container exec -it $(sudo docker container ls | grep "wordpress:latest" | cut -d" " -f1) bash`
 
-#### 4.2.2. Give ownership recursively
-
+Give ownership recursively\
 `chown -R www-data:www-data /var/www/html`
 
 ## 5. (OPTIONAL) Share a local folder from host <> container
