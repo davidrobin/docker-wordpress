@@ -95,6 +95,9 @@ Create Wordpress application's volume archive\
 Create MariaDB application's volume archive\
 `sudo docker cp $(sudo docker ps -qf "name=^wordpress-database"):/var/lib/mysql . && sudo tar -zcf wordpress_database.tar.gz mysql`
 
+Upload archives to destination host\
+`rsync -avhP wordpress_application.tar.gz wordpress_database.tar.gz -e "ssh -p $SSH_PORT" drbn@$SSH_DEST_IP_OR_HOSTNAME:`
+
 ### On destination host
 
 Expand WordPress application's volume archive\
