@@ -88,14 +88,18 @@ Give ownership recursively\
 ## 5. (OPTIONAL) Update volume content properly
 In case you've made change locally and you want to update your applications on your remote server for instance
 
+### On source host
+
 Create Wordpress application's volume archive\
 `sudo docker cp $(sudo docker ps -qf "name=^wp-wordpress"):/var/www/html . && tar -zc --exclude='wp-config.php' -f wp_wp.tar.gz html`
 
-Expand WordPress application's volume archive\
-`sudo tar -xf wp_wp.tar.gz && sudo docker cp html $(sudo docker ps -qf "name=^wp-wordpress"):/var/www`
-
 Create MariaDB application's volume archive\
 `sudo docker cp $(sudo docker ps -qf "name=^wp-db"):/var/lib/mysql . && sudo tar -zcf wp_db.tar.gz mysql`
+
+### On destination host
+
+Expand WordPress application's volume archive\
+`sudo tar -xf wp_wp.tar.gz && sudo docker cp html $(sudo docker ps -qf "name=^wp-wordpress"):/var/www`
 
 Expand MariaDB application's volume archive\
 `sudo tar -xf wp_db.tar.gz && sudo docker cp mysql $(sudo docker ps -qf "name=^wp-db"):/var/lib`
