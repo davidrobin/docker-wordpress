@@ -2,7 +2,7 @@ services:
   db:
     # We use a mariadb image which supports both amd64 & arm64 architecture
     image: mariadb:10.6.4-focal
-    container_name: wp-db
+    container_name: wordpress-database
     # If you really want to use MySQL, uncomment the following line
     #image: mysql:8.0.27
     command: '--default-authentication-plugin=mysql_native_password'
@@ -19,7 +19,7 @@ services:
       - 33060
   wordpress:
     image: wordpress:latest
-    container_name: wp-wordpress
+    container_name: wordpress-application
     volumes:
       - wp_data:/var/www/html
     ports:
