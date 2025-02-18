@@ -90,18 +90,18 @@ In case you've made change locally and you want to update your applications on y
 ### On source host
 
 Create Wordpress application's volume archive\
-`sudo docker cp $(sudo docker ps -qf "name=^wordpress-application"):/var/www/html . && tar -zc --exclude='wp-config.php' -f wp_wp.tar.gz html`
+`sudo docker cp $(sudo docker ps -qf "name=^wordpress-application"):/var/www/html . && tar -zc --exclude='wp-config.php' -f wordpress_application.tar.gz html`
 
 Create MariaDB application's volume archive\
-`sudo docker cp $(sudo docker ps -qf "name=^wordpress-database"):/var/lib/mysql . && sudo tar -zcf wp_db.tar.gz mysql`
+`sudo docker cp $(sudo docker ps -qf "name=^wordpress-database"):/var/lib/mysql . && sudo tar -zcf wordpress_database.tar.gz mysql`
 
 ### On destination host
 
 Expand WordPress application's volume archive\
-`sudo tar -xf wp_wp.tar.gz && sudo docker cp html $(sudo docker ps -qf "name=^wordpress-application"):/var/www`
+`sudo tar -xf wordpress_application.tar.gz && sudo docker cp html $(sudo docker ps -qf "name=^wordpress-application"):/var/www`
 
 Expand MariaDB application's volume archive\
-`sudo tar -xf wp_db.tar.gz && sudo docker cp mysql $(sudo docker ps -qf "name=^wordpress-database"):/var/lib`
+`sudo tar -xf wordpress_database.tar.gz && sudo docker cp mysql $(sudo docker ps -qf "name=^wordpress-database"):/var/lib`
 
 Finally, restart containers\
 `sudo docker restart $(sudo docker ps -qf "name=^wordpress-application") && sudo docker restart $(sudo docker ps -qf "name=^wordpress-database")`
