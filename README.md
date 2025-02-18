@@ -39,10 +39,10 @@ Update your Docker applications following a change in your `docker-compose.yml` 
 `sudo docker compose pull && sudo docker compose up -d`
 
 Run shell prompt from WordPress container\
-`sudo docker exec -it $(sudo docker ps -aqf "name=^wp-wordpress") sh`
+`sudo docker exec -it $(sudo docker ps -aqf "name=^wordpress-application") sh`
 
 Run shell prompt from MariaDB container\
-`sudo docker exec -it $(sudo docker ps -aqf "name=^wp-db") sh`
+`sudo docker exec -it $(sudo docker ps -aqf "name=^wordpress-database") sh`
 
 ### 3.2.Generic commands
 Check if the port used by Docker is listening\
@@ -79,7 +79,7 @@ define('WP_SITEURL','https://example.com/site/');
 In order to avoid filesystem errors when installing extensions, for example
 
 Access command line from the container\
-`sudo docker container exec -it $(sudo docker container ls | grep "wordpress:latest" | cut -d" " -f1) bash`
+`sudo docker container exec -it $(sudo docker ps -aqf "name=^wordpress-application") sh`
 
 Give ownership recursively\
 `chown -R www-data:www-data /var/www/html`
@@ -90,21 +90,21 @@ In case you've made change locally and you want to update your applications on y
 ### On source host
 
 Create Wordpress application's volume archive\
-`sudo docker cp $(sudo docker ps -qf "name=^wp-wordpress"):/var/www/html . && tar -zc --exclude='wp-config.php' -f wp_wp.tar.gz html`
+`sudo docker cp $(sudo docker ps -qf "name=^wordpress-application"):/var/www/html . && tar -zc --exclude='wp-config.php' -f wp_wp.tar.gz html`
 
 Create MariaDB application's volume archive\
-`sudo docker cp $(sudo docker ps -qf "name=^wp-db"):/var/lib/mysql . && sudo tar -zcf wp_db.tar.gz mysql`
+`sudo docker cp $(sudo docker ps -qf "name=^wordpress-database"):/var/lib/mysql . && sudo tar -zcf wp_db.tar.gz mysql`
 
 ### On destination host
 
 Expand WordPress application's volume archive\
-`sudo tar -xf wp_wp.tar.gz && sudo docker cp html $(sudo docker ps -qf "name=^wp-wordpress"):/var/www`
+`sudo tar -xf wp_wp.tar.gz && sudo docker cp html $(sudo docker ps -qf "name=^wordpress-application"):/var/www`
 
 Expand MariaDB application's volume archive\
-`sudo tar -xf wp_db.tar.gz && sudo docker cp mysql $(sudo docker ps -qf "name=^wp-db"):/var/lib`
+`sudo tar -xf wp_db.tar.gz && sudo docker cp mysql $(sudo docker ps -qf "name=^wordpress-database"):/var/lib`
 
 Finally, restart containers\
-`sudo docker restart $(sudo docker ps -qf "name=^wp-wordpress") && sudo docker restart $(sudo docker ps -qf "name=^wp-db")`
+`sudo docker restart $(sudo docker ps -qf "name=^wordpress-application") && sudo docker restart $(sudo docker ps -qf "name=^wordpress-database")`
 
 ## 6. (OPTIONAL) Share a local folder from host <> container
 
@@ -132,7 +132,7 @@ Run this command from the folder containing `docker-compose.yml` file:
 #### 7.1. Folders on Linux
 
 WordPress volume\
-`/var/lib/docker/volumes/wp_wp_data/_data/`
+`/var/lib/docker/volumes/*_wp_data/_data/`
 
 MariaDB volume\
-`/var/lib/docker/volumes/wp_db_data/_data/`
+`/var/lib/docker/volumes/*_db_data/_data/`
