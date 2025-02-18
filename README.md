@@ -106,6 +106,9 @@ Expand WordPress application's volume archive\
 Expand MariaDB application's volume archive\
 `sudo tar -xf wordpress_database.tar.gz && sudo docker cp mysql $(sudo docker ps -qf "name=^wordpress-database"):/var/lib`
 
+Give ownership recursively to wordpress aplication's volume\
+`sudo docker exec $(sudo docker ps -qf "name=^wordpress-application") chown -R www-data:www-data /var/www/html`
+
 Finally, restart containers\
 `sudo docker restart $(sudo docker ps -qf "name=^wordpress-application") && sudo docker restart $(sudo docker ps -qf "name=^wordpress-database")`
 
