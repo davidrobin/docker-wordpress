@@ -15,9 +15,8 @@ Create a new folder, download the `docker-compose.yml` file in it
 
 Set some variables in this file:
 
-1. MYSQL_ROOT_PASSWORD
-2. MYSQL_PASSWORD
-3. WORDPRESS_DB_PASSWORD
+1. DB_ROOT_PASSWORD
+2. DB_PASSWORD
 
 Execute the following command from this new folder: `sudo docker compose up -d`
 
