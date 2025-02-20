@@ -59,10 +59,10 @@ Adapt your setup from `nginx-location.conf` file
 Execute this command to add necessary lines to `wp-config.php` file
 > Adapt container name & WordPress site URL
 
-`sudo docker container exec -it $(sudo docker ps -aqf "name=^wp-app_...") bash -c "wpUrl='https://domain.tld/wp-subdomain/'; echo -e \"\ndefine('WP_HOME', '\$wpUrl');\ndefine('WP_SITEURL', '\$wpUrl');\" >> /var/www/html/wp-config.php"`
+`sudo docker container exec -it $(sudo docker ps -aqf "name=^wp-app_...") bash -c "wpUrl='https://domain.tld/wp-subdomain/'; sed -i \"2i define('WP_HOME', '\$wpUrl');\ndefine('WP_SITEURL', '\$wpUrl');\" /var/www/html/wp-config.php"`
 
 Check that lines have been correctly added in `wp-config.php` file\
-` sudo docker container exec -it $(sudo docker ps -aqf "name=^wp-app_fr-chez-ali") tail /var/www/html/wp-config.php`
+` sudo docker container exec -it $(sudo docker ps -aqf "name=^wp-app_fr-chez-ali") head /var/www/html/wp-config.php`
 
 or
 
