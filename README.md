@@ -38,11 +38,17 @@ List existing volumes\
 Update your Docker applications following a change in your `docker-compose.yml` file\
 `sudo docker compose pull && sudo docker compose up -d`
 
+Delete containters & volumes associated from `docker-compose.yml` file\
+`sudo docker compose down -v`
+
 Run shell prompt from WordPress container\
 `sudo docker exec -it $(sudo docker ps -aqf "name=^wordpress-application") sh`
 
 Run shell prompt from MariaDB container\
 `sudo docker exec -it $(sudo docker ps -aqf "name=^wordpress-database") sh`
+
+Run shell prompt from WP-CLI container\
+`sudo docker compose run --rm wp-cli bash`
 
 ### 3.2.Generic commands
 Check if the port used by Docker is listening\
