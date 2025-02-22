@@ -51,7 +51,7 @@ Run shell prompt from WP-CLI container\
 `sudo docker compose run --rm wp-cli bash`
 
 Run WP-CLI command from WP-CLI container\
-`sudo docker compose run --rm wp-cli wp core install`
+`sudo docker compose run --rm wp-cli wp core install --title="Headless WordPress" --url="http://localhost:8000" --admin_user="admin" --admin_email="admin@local.host"`
 
 ### 3.2.Generic commands
 Check if the port used by Docker is listening\
