@@ -50,6 +50,9 @@ Run shell prompt from MariaDB container\
 Run shell prompt from WP-CLI container\
 `sudo docker compose run --rm wp-cli bash`
 
+Run WP-CLI command from WP-CLI container\
+`sudo docker compose run --rm wp-cli wp core install`
+
 ### 3.2.Generic commands
 Check if the port used by Docker is listening\
 `sudo lsof -iTCP:8000 -sTCP:LISTEN`
